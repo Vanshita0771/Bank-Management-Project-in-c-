@@ -32,12 +32,12 @@ class Account{
 	char typeofaccount_[20];
 	int balance_amt;
 	long long phone_no;
-    char address[100];
+        char address[100];
 	public:
 		time_t now = time(0);
-        tm *ltm = localtime(&now);//for current time
+                tm *ltm = localtime(&now);//for current time
         
-        //returns the name of the account holder
+                //returns the name of the account holder
 		char* get_name(){
 			return name;
 		}
@@ -85,7 +85,7 @@ class Account{
 	    //Info--Used to enter all the details of account holder
 		void info(){
 			cout<<"Please enter your account_no:";
-		    cin>>account_no;
+		        cin>>account_no;
 		    
 			cout<<"Please enter your name:";
 			cin.ignore();
@@ -95,10 +95,10 @@ class Account{
 			cin>>phone_no;
 			
 			cout<<"Please enter type of account:";
-	        cin.ignore();
+	                cin.ignore();
 			cin.getline(typeofaccount_,20);
 	        
-	    	cout<<"Please enter your money to be deposited:";
+	    	        cout<<"Please enter your money to be deposited:";
 			cin>>balance_amt;
 			
 			cout<<"Please enter address:";
@@ -156,8 +156,8 @@ class Transaction{
         
      }
      
-     /*Withdraw--Gets the value of data member(acc_no) and (bal_before) from Account object ,
-	 then sets the value for data member(bal_after) by subtracting bal_before with amt */
+  /*Withdraw--Gets the value of data member(acc_no) and (bal_before) from Account object,
+  then sets the value for data member(bal_after) by subtracting bal_before with amt */
     void withdraw(Account a,int amt){
         acc_no=a.get_account_no();
         bal_before=a.get_balance_amt();
@@ -175,9 +175,9 @@ class Employee{
 		//Add new customers to the bank who become an account holder in the Accfile.dat.
 		void create_account(){
 			
-	        ofstream a1("AccFile.dat",ios::binary|ios::app);//Created object of ofstream
+	                ofstream a1("AccFile.dat",ios::binary|ios::app);//Created object of ofstream
 			Account a;                                      //Created object of Account class
-		    a.info();                                       //Call to member function(info) of account class
+		        a.info();                                       //Call to member function(info) of account class
 			a1.write((char*)&a,sizeof(a));                  //Writing object of class into binary file
 			a1.close();                                    //Closing of the file
 			cout<<"New account created"<<endl;
@@ -188,38 +188,38 @@ class Employee{
 		
 			ifstream acc_file;                                  //Created object of ifstream
 			Account a;                                         //Created object of Account class
-		    acc_file.open("AccFile.dat",ios::binary | ios::in);//Opening of file(AccountFile)
-		    if(!acc_file){                                    //if file is unable to open
+		        acc_file.open("AccFile.dat",ios::binary | ios::in);//Opening of file(AccountFile)
+		       if(!acc_file){                                    //if file is unable to open
 				cout<<"Unable to open"<<endl;
 			}
-		    else{
+		       else{
 		    	acc_file.read((char *)&a,sizeof(a));          //Reading the object from file
-		       while(!acc_file.eof()){ 
+		        while(!acc_file.eof()){ 
 		       
 		        //Printing the account_no and balance of all account holders
-		      	cout<<"Account_no:"<<a.get_account_no()<<endl;
-		        cout<<"Balance Amount:"<<a.get_balance_amt()<<endl;
-		        cout<<"-------------------"<<endl;
-				acc_file.read((char*)&a,sizeof(a));          //Reading the object from file
+		           cout<<"Account_no:"<<a.get_account_no()<<endl;
+		           cout<<"Balance Amount:"<<a.get_balance_amt()<<endl;
+		           cout<<"-------------------"<<endl;
+			   acc_file.read((char*)&a,sizeof(a));          //Reading the object from file
 		     }
 		    acc_file.close();                               //Closing the file
 	   	}
 	}
 	//Delete the information related to the account holder from the customer data file
-	void delete_account(){
-		cout<<"Enter the account_no to be deleted:"<<endl;
-		int acc_no;
-		cin>>acc_no;                                                //Account no from the employee to be deleted
-		fstream acc_file;                                          //Created object of fstream
-		ofstream new_file;                                         //Created object of ofstream class
-		Account a;                                                //Created object of account class
-		acc_file.open("AccFile.dat",ios::binary | ios::in );	    //Opening of AccFile.dat in read mode
-		new_file.open("New.dat",ios::binary|ios::out);         	  //Opening of New.dat in writing mode
-	   	if(!acc_file){                                          //in case unable to open AccFile.dat
+	     void delete_account(){
+		   cout<<"Enter the account_no to be deleted:"<<endl;
+		   int acc_no;
+		   cin>>acc_no;                                                //Account no from the employee to be deleted
+		   fstream acc_file;                                          //Created object of fstream
+		   ofstream new_file;                                         //Created object of ofstream class
+		   Account a;                                                //Created object of account class
+		   acc_file.open("AccFile.dat",ios::binary | ios::in );	    //Opening of AccFile.dat in read mode
+		   new_file.open("New.dat",ios::binary|ios::out);         	  //Opening of New.dat in writing mode
+	   	   if(!acc_file){                                          //in case unable to open AccFile.dat
 				cout<<"Unable to open"<<endl;
 			}
-		 else{
-		    bool found=false;                                    //to check whether account_no exists or not
+		   else{
+		     bool found=false;                                    //to check whether account_no exists or not
 			acc_file.read((char *)&a,sizeof(a));                  //Reading of object of account class from file
 		     while(!acc_file.eof()){ 
 		        if(acc_no!=a.get_account_no())
@@ -244,8 +244,8 @@ class Employee{
 	}
 	
 	//Update the balance after customer has performed a deposited/withdrawn in the bank
-    void update_balance(){
-    	cout<<"Enter the acc_no in which account holder wants to deposit/withdraw:";
+             void update_balance(){
+    	        cout<<"Enter the acc_no in which account holder wants to deposit/withdraw:";
 		int acc_no;
 		cin>>acc_no;
 		fstream acc_file;                                         //Created object of fstream
@@ -256,46 +256,46 @@ class Employee{
 		new_file.open("New.dat",ios::binary|ios::out);
 		if(!acc_file){
 				cout<<"Unable to open"<<endl;
-			}
-		    else{
-		       bool found=false;                                   //to check whether account_no exists or not
-		    	acc_file.read((char *)&a,sizeof(a));              //Reading the object of class Account from the file
-		       while(!acc_file.eof()){ 
+		}
+		else{
+		    bool found=false;                                   //to check whether account_no exists or not
+		    acc_file.read((char *)&a,sizeof(a));              //Reading the object of class Account from the file
+		    while(!acc_file.eof()){ 
 		       //On finding the account,updating the balance amount
-		        if(acc_no==a.get_account_no())
-		        {
-		            found=true;
-		            Transaction t;                                    //Created object of transaction class
+		    if(acc_no==a.get_account_no())
+		     {
+		        found=true;
+		        Transaction t;                                    //Created object of transaction class
 	             	ofstream trans;                                   //Created object of fstream
 	             	trans.open("Transaction.dat",ios::binary|ios::app);//Opened file in append mode
-		           	cout<<"Amount to be deposited or withdraw:";
+		        cout<<"Amount to be deposited or withdraw:";
 	            	int amt;
 	             	cin>>amt;
-		            cout<<"Do you want to deposit/withdraw?(d/w)";
-		            char ch;
-		            cin>>ch;
-		            if(ch=='d'){                                   //to deposit money
+		        cout<<"Do you want to deposit/withdraw?(d/w)";
+		        char ch;
+		        cin>>ch;
+		        if(ch=='d'){                                   //to deposit money
 		               t.startTransaction();                       //call to startTransaction function of transaction class
 		               t.deposit(a,amt);                           //call to deposit function of transaction class
 		               a.set_balance_amt(t.get_bal_after());        //call to set_balance_amt function of account class
 		               trans.write((char*)&t,sizeof(t));            //writing in Transaction.dat file
 		               cout<<"Amt deposited"<<endl;
 		            }
-		            else{
+		         else{
 		                if(amt<=a.get_balance_amt()){               //to withdraw money
 		                    t.startTransaction();                  //call to startTransaction function of transaction class
-		                   t.withdraw(a,amt);                      //call to withdraw function of transaction class
-		                   a.set_balance_amt(t.get_bal_after());   //call to set_balance_amt function of account class
-		                   trans.write((char*)&t,sizeof(t));        //writing in Transaction.dat file
-		                   cout<<"Amt withdrawn"<<endl;
+		                    t.withdraw(a,amt);                      //call to withdraw function of transaction class
+		                    a.set_balance_amt(t.get_bal_after());   //call to set_balance_amt function of account class
+		                    trans.write((char*)&t,sizeof(t));        //writing in Transaction.dat file
+		                    cout<<"Amt withdrawn"<<endl;
 		                }
 		                else{
 		                    cout<<"You have low balance"<<endl;         //amt to be withdrwan is less than balance 
 		                    
 		                }
 		            }
-		            trans.close();                                    //closing the file
-				}
+		           trans.close();                                    //closing the file
+			}
 				new_file.write((char*)&a,sizeof(a));                 //Writing the object of class Account into the file
 				acc_file.read((char*)&a,sizeof(a));                  //Reading the object of class Account from the file
 		     }
@@ -311,57 +311,57 @@ class Employee{
 	}
 	
    //Display the account number of the last entry
-     void display_last_entry(){
-     	    ifstream acc_file;                                       //Created object of ifstream
-			Account a;                                               //Created objects of class Account 
+            void display_last_entry(){
+     	               ifstream acc_file;                                       //Created object of ifstream
+	                Account a;                                               //Created objects of class Account 
 			Account pre;                                            //Used to store previous object in the file
-		    acc_file.open("AccFile.dat",ios::binary | ios::in);     //Opened the file in read mode
+		        acc_file.open("AccFile.dat",ios::binary | ios::in);     //Opened the file in read mode
 			if(!acc_file){
 				cout<<"Unable to open"<<endl;
 			}
-		    else{
-			acc_file.read((char *)&a,sizeof(a));                   //Reading the object from file
-		     while(!acc_file.eof()){ 
-		      	pre=a;
+		        else{
+			  acc_file.read((char *)&a,sizeof(a));                   //Reading the object from file
+		        while(!acc_file.eof()){ 
+		         	pre=a;
 				acc_file.read((char*)&a,sizeof(a));                //Reading the object from file
-		     }
-		     cout<<"---------Last entry details--------"<<endl;
-		     cout<<"Account_no:"<<pre.get_account_no()<<endl;
-		     cout<<"Balance Amount:"<<pre.get_balance_amt()<<endl;
-		     cout<<"Name:"<<pre.get_name()<<endl;
-		     cout<<"Phone_No:"<<pre.get_phone_no()<<endl;
-		     cout<<"Address:"<<pre.get_address()<<endl;
-		     cout<<"-------------------"<<endl;
-		    acc_file.close();                                      //Closing of the file
+		         }
+		        cout<<"---------Last entry details--------"<<endl;
+		        cout<<"Account_no:"<<pre.get_account_no()<<endl;
+		        cout<<"Balance Amount:"<<pre.get_balance_amt()<<endl;
+		        cout<<"Name:"<<pre.get_name()<<endl;
+		        cout<<"Phone_No:"<<pre.get_phone_no()<<endl;
+		        cout<<"Address:"<<pre.get_address()<<endl;
+		        cout<<"-------------------"<<endl;
+		        acc_file.close();                                      //Closing of the file
 	   	}
 	 }
 	 
 	 
 	 //Check whether an account exists or not
-	 void search(){
-			ifstream acc_file;                                  //Created object of ifstream
-			Account a;                                          //Created object of class Account
-		    acc_file.open("AccFile.dat",ios::binary | ios::in); //Opening the file in read mode
-			if(!acc_file){
+	     void search(){
+			 ifstream acc_file;                                  //Created object of ifstream
+			 Account a;                                          //Created object of class Account
+		         acc_file.open("AccFile.dat",ios::binary | ios::in); //Opening the file in read mode
+			 if(!acc_file){
 				cout<<"Unable to open"<<endl;
 			}
-		    else{
-		    int i=0;
-		    bool found=false;
-		    cout<<"Search the account_no:"<<endl;
-		    int acc_no;
-		    cin>>acc_no;
-			acc_file.read((char *)&a,sizeof(a));                 //Reading the object from file to find the particular account
-		     while(!acc_file.eof()){ 
-		      	if(a.get_account_no()==acc_no){                  //account_no found
-		      		found=true;
-		      		break;
-				  }
-				 acc_file.read((char*)&a,sizeof(a));             //Reading the object from file 
-		     }
-		     if(found){
+		        else{
+		          int i=0;
+		          bool found=false;
+		          cout<<"Search the account_no:"<<endl;
+		          int acc_no;
+		         cin>>acc_no;
+			 acc_file.read((char *)&a,sizeof(a));                 //Reading the object from file to find the particular account
+		         while(!acc_file.eof()){ 
+		             if(a.get_account_no()==acc_no){                  //account_no found
+		      		  found=true;
+		      		   break;
+			      }
+			   acc_file.read((char*)&a,sizeof(a));             //Reading the object from file 
+		      }
+		      if(found){
 		     	cout<<"Account exists"<<endl;
-			 }
+		       }
 			 else{
 			 	cout<<"Account doesn't exist"<<endl;
 			 }
@@ -406,18 +406,18 @@ class Employee{
 		         cout<<"Account doesn't exists"<<endl;
 		     }
 		     //Closing of both files
-		    acc_file.close();                                   
-		    new_file.close();                                   
-		    remove("AccFile.dat");                                 //Removing AccFile 
-		    rename("New.dat","AccFile.dat");                     //Renaming the New.dat to AccFile.dat
-	   	}
+		      acc_file.close();                                   
+		      new_file.close();                                   
+		      remove("AccFile.dat");                                 //Removing AccFile 
+		      rename("New.dat","AccFile.dat");                     //Renaming the New.dat to AccFile.dat
+	   	  }
 	}
 	
 	
 	
 	//retrieve/updated the address of the account holder
-	void retrieveAndUpdateName(){
-    	cout<<"Enter the acc_no in which account holder wants update address:";
+	    void retrieveAndUpdateName(){
+    	         cout<<"Enter the acc_no in which account holder wants update address:";
 		int acc_no;
 		cin>>acc_no;
 		fstream acc_file;                                       //Created object of fstream
@@ -426,14 +426,14 @@ class Employee{
 		acc_file.open("AccFile.dat",ios::binary | ios::in );    //Opening of AccFile and New files
 		new_file.open("New.dat",ios::binary|ios::out);
 		if(!acc_file){
-				cout<<"Unable to open"<<endl;
-			}
-		    else{
-		       bool found=false; 
-			   acc_file.read((char *)&a,sizeof(a));            //Reading the object of class Account from the file
-		       while(!acc_file.eof()){ 
-		      //On finding the account,updating the balance amount
-		        if(acc_no==a.get_account_no())
+		     cout<<"Unable to open"<<endl;
+		}
+		else{
+		    bool found=false; 
+		    acc_file.read((char *)&a,sizeof(a));            //Reading the object of class Account from the file
+		     while(!acc_file.eof()){ 
+		     //On finding the account,updating the balance amount
+		      if(acc_no==a.get_account_no())
 		        {  
 		           found=true;
 		           char n[100];
@@ -443,10 +443,10 @@ class Employee{
 		           cin.getline(n,100);
 		           a.set_name(n);
 		           cout<<"Name updated"<<endl;
-				}
-				new_file.write((char*)&a,sizeof(a));              //Writing the object of class Account into the file
-				acc_file.read((char*)&a,sizeof(a));               //Reading the object of class Account from the file
-		     }
+		         }
+			new_file.write((char*)&a,sizeof(a));              //Writing the object of class Account into the file
+		        acc_file.read((char*)&a,sizeof(a));               //Reading the object of class Account from the file
+		       }
 		      if(!found){
 		         cout<<"Account doesn't exists"<<endl;
 		     }
@@ -457,14 +457,14 @@ class Employee{
 		     rename("New.dat","AccFile.dat");                       //Renaming the New.dat to AccFile.dat
 	   	}
 	}
-	//retrieve the balance of the account holder
-	void retrieveBalanceAmt(){
+	 //retrieve the balance of the account holder
+	    void retrieveBalanceAmt(){
 			ifstream acc_file;                                     //Created object of ifstream
 			Account a;                                             //Created object of Account class
-		    acc_file.open("AccFile.dat",ios::binary | ios::in);    //Opening of file(AccountFile)
-		    cout<<"Enter the acc_no in which account holder wants update address:";
-	    	int acc_no;
-	    	cin>>acc_no;
+		        acc_file.open("AccFile.dat",ios::binary | ios::in);    //Opening of file(AccountFile)
+		        cout<<"Enter the acc_no in which account holder wants update address:";
+	    	        int acc_no;
+	    	        cin>>acc_no;
 			if(!acc_file){                                        //if file is unable to open
 				cout<<"Unable to open"<<endl;
 			}
@@ -477,7 +477,7 @@ class Employee{
 		        found=true;
 		        break;
 		       }
-				acc_file.read((char*)&a,sizeof(a));              //Reading the object from file
+			acc_file.read((char*)&a,sizeof(a));              //Reading the object from file
 		     }
 		      if(!found){
 		         cout<<"Account doesn't exists"<<endl;
@@ -488,49 +488,48 @@ class Employee{
 	
 	
 	//Transaction details along with the account information
-    void accAndTrans(){
-         //Created objects of ifstream
-     	    ifstream acc_file;
-     	    ifstream trans_file;
+           void accAndTrans(){
+               //Created objects of ifstream
+     	                ifstream acc_file;
+     	                ifstream trans_file;
 			Account a;                                           //Created object of class Account 
 			Transaction t;                                        //Created object of class Transaction
 			int accNo;
 			bool found=false;
-		    cout<<"Enter the account_no:";
-		    cin>>accNo;
-		    //Open files in read mode
-		    acc_file.open("AccFile.dat",ios::binary | ios::in);     
-		    trans_file.open("Transaction.dat",ios::binary | ios::in);
+		        cout<<"Enter the account_no:";
+		        cin>>accNo;
+		        //Open files in read mode
+		        acc_file.open("AccFile.dat",ios::binary | ios::in);     
+		        trans_file.open("Transaction.dat",ios::binary | ios::in);
 			if(!acc_file){
 				cout<<"Unable to open"<<endl;
 			}
-		    else{
-		     acc_file.read((char *)&a,sizeof(a));                   //Reading the object from file
-		     while(!acc_file.eof()){ 
-		        if(accNo==a.get_account_no()){                      //when accNo is found
+		        else{
+		          acc_file.read((char *)&a,sizeof(a));                   //Reading the object from file
+		          while(!acc_file.eof()){ 
+		           if(accNo==a.get_account_no()){                      //when accNo is found
 		            found=true;
 		            cout<<"Account_no:"<<a.get_account_no()<<endl;
 		            cout<<"Balance Amount:"<<a.get_balance_amt()<<endl;
 		            cout<<"Name:"<<a.get_name()<<endl;
 		            cout<<"Phone_No:"<<a.get_phone_no()<<endl;
 		            cout<<"Address:"<<a.get_address()<<endl;
-		        }
+		          }
 				acc_file.read((char*)&a,sizeof(a));                 //Reading the file
-		     }
-		     if(!found){                            
+		        }
+		       if(!found){                            
 		         cout<<"Account no doesn't exist"<<endl;            
 		         return;
-		     }
-		    acc_file.close();                                       //Closing of the file
-	   	} 
-	   	if(!trans_file){
+		         }
+		          acc_file.close();                                       //Closing of the file
+	   	      } 
+	   	      if(!trans_file){
 				cout<<"Unable to open"<<endl;
 			}
-		    else{
-		    
+		     else{
 			 trans_file.read((char *)&t,sizeof(t));               //Reading the object from file
-		     while(!trans_file.eof()){ 
-		        if(accNo==t.get_acc_no()){                         //account_no found
+		         while(!trans_file.eof()){ 
+		          if(accNo==t.get_acc_no()){                         //account_no found
 		            found=true;
 		            //Displaying the details of the transaction
 		            cout<<"Transaction id:"<<t.get_transaction_id()<<endl;
@@ -538,51 +537,50 @@ class Employee{
 		            cout<<"Balance Amount After Transaction:"<<t.get_bal_after()<<endl;
 		            cout <<"Year:" << 1900 + t.ltm->tm_year<<endl;
 		            cout <<"Month: "<< 1 + t.ltm->tm_mon<< endl;
-                    cout <<"Day: "<< t.ltm->tm_mday << endl;
+                            cout <<"Day: "<< t.ltm->tm_mday << endl;
 		            cout<<"Time:"<< t.ltm->tm_hour << ":"<<t.ltm->tm_min<<":"<<t.ltm->tm_sec<<endl;
-		            
-		        }
+		            }
 				trans_file.read((char*)&t,sizeof(t));              //Reading the file
-		     }
-		    trans_file.close();                                   //Closing of the file
-	   	}
-    }
+		        }
+		             trans_file.close();                                   //Closing of the file
+	               }
+               }
     
-    //Displays all the information related to an account holder from the customer file on the basis of specified account number
-    void displayDetailsAccHolder(){
-     	    ifstream acc_file;                                   //Created object of ifstream
+      //Displays all the information related to an account holder from the customer file on the basis of specified account number
+             void displayDetailsAccHolder(){
+     	                ifstream acc_file;                                   //Created object of ifstream
 			Account a;                                           //Created objects of class Account 
 			int accNo;
 			bool found=false;                                    //to check whether the account exist or not
-		    cout<<"Enter the account_no:";
-		    cin>>accNo;
-		    acc_file.open("AccFile.dat",ios::binary | ios::in);      //opening the file in read mode
+		        cout<<"Enter the account_no:";
+		        cin>>accNo;
+		        acc_file.open("AccFile.dat",ios::binary | ios::in);      //opening the file in read mode
 			if(!acc_file){
 				cout<<"Unable to open"<<endl;
 			}
-		    else{
-		   	 acc_file.read((char *)&a,sizeof(a));                   //Reading the object from file
-		     while(!acc_file.eof()){ 
-		        if(accNo==a.get_account_no()){                     //when account_no found
-		            found=true;
+		        else{
+		   	  acc_file.read((char *)&a,sizeof(a));                   //Reading the object from file
+		          while(!acc_file.eof()){ 
+		            if(accNo==a.get_account_no()){                     //when account_no found
+		              found=true;
 		            //Displaying the details of account holder
-		            cout<<"Account_no:"<<a.get_account_no()<<endl;
-		            cout<<"Balance Amount:"<<a.get_balance_amt()<<endl;
-		            cout<<"Name:"<<a.get_name()<<endl;
-		            cout<<"Phone_No:"<<a.get_phone_no()<<endl;
-		            cout<<"Address:"<<a.get_address()<<endl;
-		        }
+		              cout<<"Account_no:"<<a.get_account_no()<<endl;
+		              cout<<"Balance Amount:"<<a.get_balance_amt()<<endl;
+		              cout<<"Name:"<<a.get_name()<<endl;
+		              cout<<"Phone_No:"<<a.get_phone_no()<<endl;
+		              cout<<"Address:"<<a.get_address()<<endl;
+		         }
 				acc_file.read((char*)&a,sizeof(a));           //Reading the object from file
-		     }
-		     if(!found){                                      //account no not found
+		      }
+		       if(!found){                                      //account no not found
 		         cout<<"Account no doesn't exist"<<endl;
 		         return;
-		     }
-		    acc_file.close();                                 //Closing of the file
-	   	}
-    }
+		       }
+		       acc_file.close();                                 //Closing of the file
+	   	    }
+          }
     
-}; 
+   }; 
 
 /*Operations class contains member function(operate) to ask the employee which operation has to perform.
 This class inherit Employee class and makes Employee's function as private so that other class can't inherit it*/
